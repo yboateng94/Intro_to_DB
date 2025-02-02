@@ -1,5 +1,5 @@
 import mysql.connector
-from mysql.connector import Error
+from mysql.connector import Error, errorcode
 
 
 def create_database():
@@ -19,10 +19,11 @@ def create_database():
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store;")
 
             print("Database 'alx_book_store' created successfully!")
-
-    except Error as e:
-        # Handle connection or execution errors
-        print(f"Error: {e}")
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_DB_CREATE_EXISTS:
+            print("Database 'alx_book_store' already exists.")
+        else:
+            print(f"Failed creating database: {err}")
 
     finally:
         # Close the connection if it's open
