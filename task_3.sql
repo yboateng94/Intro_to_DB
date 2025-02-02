@@ -1,5 +1,5 @@
-USE alx_book_store;
+-- Use the database passed as an argument
+USE {{alx_book_store}};
 
-SELECT TABLE_NAME
-FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = DATABASE();
+-- List all the tables in the selected database
+SHOW TABLES;
